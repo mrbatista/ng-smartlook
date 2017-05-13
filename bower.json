@@ -1,0 +1,24 @@
+{
+  "name": "ng-smartlook",
+  "authors": [
+    "f3ltron <fgiraud@student.42.fr>"
+  ],
+  "description": "AngularJS integration for smartlook",
+  "main": "ng-smartlook.js",
+  "version": "1.0.0",
+  "keywords": [
+    "smartlook",
+    "angular",
+    "angularjs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/f3ltron/ng-smartlook",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "package.json"
+  ]
+}
