@@ -13,4 +13,28 @@ and then add to your index.html after including angularjs
 
 - for npm and yarn
     <script type="text/javascript" src="/node_modules/ng-smartlook/ng-smartlook.js" />
-    
+
+
+- after include it on your angular app
+
+var app = angular.module('yourApp', ['ng-smartlook']);
+
+- Now you are ready to use it :
+
+app.config(['SmartlookProvider', function(SmartlookProvider){
+
+    SmartlookProvider.init({apiKey: "yourSmartlookApiKey"});
+
+}]);
+
+it should be non empty and an objet with apikey or it will throw an error
+
+- And finally you can use the service smartlook and acces normal smartlook api
+
+app.controller("controller", ['Smartlook', function(Smartlook){
+    Smartlook.smartlook('tag', 'keyTag', 'valueTag');
+}]);
+
+etc etc...
+
+if you want more information about smartlook api and what you can do https://www.smartlook.com/docs/api.html
