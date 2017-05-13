@@ -9,31 +9,37 @@
 and then add to your index.html after including angularjs
 
 - for bower 
-    <script type="text/javascript" src="/bower_components/ng-smartlook/ng-smartlook.js" />
+    `<script type="text/javascript" src="/bower_components/ng-smartlook/ng-smartlook.js" />`
 
 - for npm and yarn
-    <script type="text/javascript" src="/node_modules/ng-smartlook/ng-smartlook.js" />
+    `<script type="text/javascript" src="/node_modules/ng-smartlook/ng-smartlook.js" />`
 
 
 - after include it on your angular app
 
+```javascript
 var app = angular.module('yourApp', ['ng-smartlook']);
+```
 
 - Now you are ready to use it :
 
+```javascript
 app.config(['SmartlookProvider', function(SmartlookProvider){
 
     SmartlookProvider.init({apiKey: "yourSmartlookApiKey"});
 
 }]);
+```
 
 it should be non empty and an objet with apikey or it will throw an error
 
 - And finally you can use the service smartlook and acces normal smartlook api
 
+```javascript
 app.controller("controller", ['Smartlook', function(Smartlook){
     Smartlook.smartlook('tag', 'keyTag', 'valueTag');
 }]);
+```
 
 etc etc...
 
