@@ -6,6 +6,7 @@
 
     angular.module("ng-smartlook").provider('Smartlook', [function SmartlookProvider(){
         var smartlookActivated = true;
+        var applicationStart;
 
         this.init = function(config){
             if(!config || !config.apiKey)
@@ -27,6 +28,7 @@
             })(document);
             if(smartlookActivated){
                 smartlook('init', config.apiKey);
+                applicationStart = new Date();
             }
         }
 
@@ -39,14 +41,18 @@
                     $window.smartlook[methodName].apply($window.smartlook, arguments);
                 };
             }
+
+            function startToNow(){
+              return  new Date(new Date() - applicationStart).getUTCSeconds();
+            }
+
             var service = {
-                smartlook: $window.smartlook
+                smartlook: $window.smartlook,
+                startToNow: startToNow
             }
             return service;
         }
-        
         this.$get = getter;
-
     }]);
 
 })(angular);

@@ -8,11 +8,11 @@
 
 and then add to your index.html after including angularjs
 
-- for bower 
-    `<script type="text/javascript" src="/bower_components/ng-smartlook/ng-smartlook.js" />`
+- for bower
+    `<script type="text/javascript" src="/bower_components/ng-smartlook/ng-smartlook.js"></script>`
 
 - for npm and yarn
-    `<script type="text/javascript" src="/node_modules/ng-smartlook/ng-smartlook.js" />`
+    `<script type="text/javascript" src="/node_modules/ng-smartlook/ng-smartlook.js"></script>`
 
 
 - after include it on your angular app
