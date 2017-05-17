@@ -33,14 +33,14 @@ app.config(['SmartlookProvider', function(SmartlookProvider){
 
 it should be non empty and an objet with apikey or it will throw an error
 
-- And finally you can use the service smartlook and acces normal smartlook api
+- And finally you can use the service smartlook and acces normal smartlook api and more method
 
 ```javascript
 app.controller("controller", ['Smartlook', function(Smartlook){
     Smartlook.smartlook('tag', 'keyTag', 'valueTag');
+    Smartlook.startToNow(); // will give you the number of second from start to now nice for catching error time on video
 }]);
 ```
 
-etc etc...
 
 if you want more information about smartlook api and what you can do https://www.smartlook.com/docs/api.html
