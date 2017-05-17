@@ -1,58 +1,48 @@
 (function(angular) {
 
-    'use strict';
+  'use strict';
 
-    angular.module("ng-smartlook", []);
+  angular.module("ng-smartlook", []);
 
-    angular.module("ng-smartlook").provider('Smartlook', [function SmartlookProvider(){
-        var smartlookActivated = true;
-        var applicationStart;
+  angular.module("ng-smartlook").provider('Smartlook', SmartlookProvider);
 
-        this.init = function(config){
-            if(!config || !config.apiKey)
-                throw new Error("no apiKey index");
-            if(typeof config.apiKey != "string")
-                throw new Error("apiKey must be a string");
-            window.smartlook||(function(d) {
-                var o = window.smartlook = function(){
-                    o.api.push(arguments);
-                }
-                var h = document.getElementsByTagName('head')[0];
-                var c = document.createElement('script');
-                o.api = new Array();
-                c.async = true;
-                c.type = "text/javascript";
-                c.charset = "utf-8";
-                c.src = 'https://rec.smartlook.com/recorder.js';
-                h.appendChild(c);
-            })(document);
-            if(smartlookActivated){
-                smartlook('init', config.apiKey);
-                applicationStart = new Date();
-            }
-        }
+  function SmartlookProvider() {
+    var applicationStart;
 
-        getter.$inject = ['$log', '$window'];
+    this.init = function(config) {
+      if (!config || !config.apiKey) {
+        throw new Error("no apiKey index");
+      } else if (typeof config.apiKey !== "string") {
+        throw new Error("apiKey must be a string");
+      } else {
+        window.smartlook || (function(d) {
+          var o = window.smartlook = function() {
+            o.api.push(arguments);
+          };
+          var h = document.getElementsByTagName('head')[0];
+          var c = document.createElement('script');
+          o.api = [];
+          c.async = true;
+          c.type = "text/javascript";
+          c.charset = "utf-8";
+          c.src = 'https://rec.smartlook.com/recorder.js';
+          h.appendChild(c);
+        })(document);
+      }
 
-        function getter($log, $window) {
+      smartlook('init', config.apiKey);
+      applicationStart = new Date();
+    };
 
-            function _bindSmartlookMethod(methodName){
-                return function(){
-                    $window.smartlook[methodName].apply($window.smartlook, arguments);
-                };
-            }
+    this.$get = ['$window', function($window) {
+      function startToNow() {
+        return new Date(new Date() - applicationStart).getUTCSeconds();
+      }
 
-            function startToNow(){
-              return  new Date(new Date() - applicationStart).getUTCSeconds();
-            }
-
-            var service = {
-                smartlook: $window.smartlook,
-                startToNow: startToNow
-            }
-            return service;
-        }
-        this.$get = getter;
-    }]);
-
+      return {
+        smartlook: $window.smartlook,
+        startToNow: startToNow
+      }
+    }];
+  }
 })(angular);
